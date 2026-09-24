@@ -11,23 +11,23 @@ Baseado no `PRD-the-quiet-hour.md`, organizado pelos milestones M0–M5.
 - [ ] Revisar a atribuição e a referência (capítulo ou carta) de cada entrada.
 
 ## M1 — Setup, conteúdo, seleção, passos 1–2
-- [ ] Trocar `namespace`/`applicationId` para `br.com.rodsil.quiethour` (hoje está `com.example.thequiethour`).
-- [ ] Subir `minSdk` de 24 para 26.
-- [ ] Ativar o core library desugaring (`java.time`).
-- [ ] Adicionar Hilt, Room, DataStore e WorkManager ao `libs.versions.toml`.
-- [ ] Apagar os placeholders do template (`DataRepository`, `MainScreen`, `MainScreenViewModel` e os testes deles).
-- [ ] Criar o `git init` e o primeiro commit.
-- [ ] Criar o loader do content pack a partir de `assets/` com kotlinx.serialization. O engine não pode saber nada de estoicismo.
-- [ ] Gerar o `installId` na primeira execução e guardar no DataStore.
-- [ ] Seleção determinística: `hash(installId + localDate) % count`, com janela de exclusão de 180 dias.
-- [ ] Persistir o índice entregue em cada data.
-- [ ] Testes da seleção: mesma data dá a mesma passagem, sem repetição em 180 dias.
-- [ ] Schema do Room: `completed_days`, `reflections`, `favorites`, `streak_history`.
-- [ ] Tema próprio: fonte serif e as variantes light/dark/sepia.
-- [ ] Grafo aninhado do ritual.
-- [ ] Passo 1: tela da passagem, tela cheia, sem chrome, só com "Continue".
-- [ ] Passo 2: tela da pergunta.
-- [ ] Acesso ao dia de ontem.
+- [x] Trocar `namespace`/`applicationId` para `br.com.rodsil.quiethour`.
+- [x] Subir `minSdk` de 24 para 26.
+- [x] Ativar o core library desugaring (`java.time`).
+- [x] Adicionar Hilt, Room e DataStore ao `libs.versions.toml`. WorkManager entra no M4, junto com as notificações.
+- [x] Apagar os placeholders do template (`DataRepository`, `MainScreen`, `MainScreenViewModel` e os testes deles).
+- [x] Criar o `git init` e o primeiro commit.
+- [x] Criar o loader do content pack a partir de `assets/` com kotlinx.serialization. O engine não pode saber nada de estoicismo. O pack é gerado por `content/build-pack.py` a partir dos lotes aprovados.
+- [x] Gerar o `installId` na primeira execução e guardar no DataStore.
+- [x] Seleção determinística: `hash(installId + localDate) % count`, com janela de exclusão de 180 dias (reduzida para o tamanho do pack menos 1 enquanto o pack tiver menos de 181 passagens).
+- [x] Persistir a passagem entregue em cada data (guarda o id, não o índice, para sobreviver a mudanças no pack).
+- [x] Testes da seleção: mesma data dá a mesma passagem, sem repetição em 180 dias.
+- [x] Schema do Room: `delivered_passages`. As tabelas `completed_days`, `reflections`, `favorites` e `streak_history` entram nos milestones que as usam (M2 e M3).
+- [x] Tema próprio: fonte serif e as variantes light/dark. O sepia entra no M3, junto com a configuração de tema.
+- [x] Fluxo do ritual no back stack do Navigation 3 (o Nav3 não tem grafos aninhados; cada passo é uma chave).
+- [x] Passo 1: tela da passagem, tela cheia, sem chrome, só com "Continue".
+- [x] Passo 2: tela da pergunta.
+- [ ] Acesso ao dia de ontem. O repositório já entrega a passagem de qualquer data; falta a tela, que vai para o journal (M3), porque o PRD proíbe outros botões na tela da passagem.
 
 ## M2 — Pausa, reflexão, streak
 - [ ] Timer da pausa com coroutine e relógio monotônico, que sobrevive a mudança de configuração.
