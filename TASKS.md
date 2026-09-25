@@ -22,7 +22,7 @@ Baseado no `PRD-the-quiet-hour.md`, organizado pelos milestones M0–M5.
 - [x] Seleção determinística: `hash(installId + localDate) % count`, com janela de exclusão de 180 dias (reduzida para o tamanho do pack menos 1 enquanto o pack tiver menos de 181 passagens).
 - [x] Persistir a passagem entregue em cada data (guarda o id, não o índice, para sobreviver a mudanças no pack).
 - [x] Testes da seleção: mesma data dá a mesma passagem, sem repetição em 180 dias.
-- [x] Schema do Room: `delivered_passages`. As tabelas `completed_days`, `reflections`, `favorites` e `streak_history` entram nos milestones que as usam (M2 e M3).
+- [x] Schema do Room: `delivered_passages`. `completed_days` e `reflections` entraram no M2; `favorites` entra no M3. `streak_history` não é necessária, porque a streak é calculada a partir de `completed_days`.
 - [x] Tema próprio: fonte serif e as variantes light/dark. O sepia entra no M3, junto com a configuração de tema.
 - [x] Fluxo do ritual no back stack do Navigation 3 (o Nav3 não tem grafos aninhados; cada passo é uma chave).
 - [x] Passo 1: tela da passagem, tela cheia, sem chrome, só com "Continue".
@@ -30,18 +30,18 @@ Baseado no `PRD-the-quiet-hour.md`, organizado pelos milestones M0–M5.
 - [ ] Acesso ao dia de ontem. O repositório já entrega a passagem de qualquer data; falta a tela, que vai para o journal (M3), porque o PRD proíbe outros botões na tela da passagem.
 
 ## M2 — Pausa, reflexão, streak
-- [ ] Timer da pausa com coroutine e relógio monotônico, que sobrevive a mudança de configuração.
-- [ ] Ligar `FLAG_KEEP_SCREEN_ON` durante a pausa e soltar logo depois.
-- [ ] Indicador de respiração: ciclo de 4s inspirando e 6s expirando, com anel de progresso sutil e sem contador.
-- [ ] Chime opcional no fim da pausa, desligado por padrão.
-- [ ] Botão de pular a pausa, registrando o skip.
-- [ ] Voltar durante a pausa pede confirmação.
-- [ ] Passo 4: campo de reflexão com o aviso de privacidade explícito ("salvo só no aparelho").
-- [ ] Passo 5: fechamento com incremento da streak e confirmação.
-- [ ] Máquina de estados da streak: `Active`, `AtRisk`, `Broken`, `Restored`.
-- [ ] A streak só conta com o passo 3 concluído ou pulado.
-- [ ] A streak quebra depois de 1 dia perdido.
-- [ ] Testes da streak: fuso, DST, mudança do relógio do aparelho, reinstalação.
+- [x] Timer da pausa com coroutine e relógio monotônico, que sobrevive a mudança de configuração. A duração fica fixa em 60s até a tela de settings (M3).
+- [x] Ligar `FLAG_KEEP_SCREEN_ON` durante a pausa e soltar logo depois.
+- [x] Indicador de respiração: ciclo de 4s inspirando e 6s expirando, com anel de progresso sutil e sem contador.
+- [ ] Chime opcional no fim da pausa, desligado por padrão. Adiado para o M3, junto com a opção que liga o chime.
+- [x] Botão de pular a pausa, registrando o skip.
+- [x] Voltar durante a pausa pede confirmação.
+- [x] Passo 4: campo de reflexão com o aviso de privacidade explícito ("salvo só no aparelho").
+- [x] Passo 5: fechamento com incremento da streak e confirmação.
+- [x] Máquina de estados da streak: `Active`, `AtRisk`, `Broken`, calculada a partir dos dias concluídos. `Restored` entra no M5, junto com o anúncio recompensado.
+- [x] A streak só conta com o passo 3 concluído ou pulado.
+- [x] A streak quebra depois de 1 dia perdido.
+- [x] Testes da streak: fuso, DST e mudança do relógio do aparelho. Reinstalação depende do backup automático do Android restaurar o banco; falta testar num aparelho.
 
 ## M3 — Journal e settings
 - [ ] Lista cronológica de dias concluídos (passagem, pergunta, reflexão).
